@@ -30,6 +30,11 @@ const Home = ({ id, go, fetchedUser, request}) => (
                                 </Button>
 				
 			</Div>
+			<Div>
+				<Button size="xl" level="2" onClick={request} data-num="5">
+					вЗлОмАтЬ жОпУ (сВоЮ)
+				</Button>
+			</Div>
 		</Group>
 	</Panel>
 );
