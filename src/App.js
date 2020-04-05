@@ -1,44 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import bridge from '@vkontakte/vk-bridge';
-import View from '@vkontakte/vkui/dist/components/View/View';
-import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
+import React, { useState } from 'react';
 import '@vkontakte/vkui/dist/vkui.css';
-
-import Home from './panels/Home';
-import Persik from './panels/Persik';
-
+import './panels/Persik.css'
+import Button from '@vkontakte/vkui/dist/components/Button/Button';
+import coin from './img/image.png'
+const open = () => {
+	window.open('https://mofei.ml')
+}
 const App = () => {
-	const [activePanel, setActivePanel] = useState('home');
-	const [fetchedUser, setUser] = useState(null);
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
-
-	useEffect(() => {
-		bridge.subscribe(({ detail: { type, data }}) => {
-			if (type === 'VKWebAppUpdateConfig') {
-				const schemeAttribute = document.createAttribute('scheme');
-				schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
-				document.body.attributes.setNamedItem(schemeAttribute);
-			}
-		});
-		async function fetchData() {
-			const user = await bridge.send('VKWebAppGetUserInfo');
-			setUser(user);
-			setPopout(null);
-		}
-		fetchData();
-	}, []);
-
-	const go = e => {
-		setActivePanel(e.currentTarget.dataset.to);
-	};
-	const request = e => {
-		fetch('http://localhost:3000?'+e.currentTarget.dataset.num)
-	};
 	return (
-		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' request={request} fetchedUser={fetchedUser} go={go} />
-			<Persik id='persik' go={go} />
-		</View>
+	<div className="div">
+		
+			<img src={coin} alt="" />
+			
+			<Button onClick={open} size="xl" style={{width: '80vw'}}>
+				Включить
+			</Button>
+	
+</div>
 	);
 }
 
